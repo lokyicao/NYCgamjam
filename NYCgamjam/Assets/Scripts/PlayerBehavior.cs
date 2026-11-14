@@ -96,10 +96,14 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with something");
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("I Got Hit by an Enemyyy");
+            Debug.Log("ouch!!");
+            Vector3 difference = transform.position - other.gameObject.transform.position;
+            difference.Normalize();
+            velocity = difference * 50;
+            isStunned = true;
+            currentStunnedTime = 0;
         }
     }
 
@@ -110,12 +114,6 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("ouch!!");
-        Vector3 difference = transform.position - other.gameObject.transform.position;
-        difference.Normalize();
-        velocity = difference * 50;
-        isStunned = true;
-        currentStunnedTime = 0;
     }
 
     void HandleInput()
