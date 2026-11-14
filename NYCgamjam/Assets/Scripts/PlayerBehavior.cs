@@ -27,7 +27,6 @@ public class PlayerBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("Hellooo");
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -46,7 +45,6 @@ public class PlayerBehavior : MonoBehaviour
                 isStunned = false;
             }
             //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity * stunControl) * Time.deltaTime;
-            Debug.Log(currentStunnedTime);
         } else
         {
             velocity += desiredDirection * accel;
@@ -63,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             velocity = Vector3.zero;
         }
+        Debug.Log($"{velocity}");
 
     }
 
