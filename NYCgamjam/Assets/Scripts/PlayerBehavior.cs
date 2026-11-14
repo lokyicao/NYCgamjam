@@ -2,15 +2,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
 
     // audio stuff
+    public AudioClip walkClip;
     public AudioClip flapClip;
     public AudioClip bounceClip;
     private AudioSource audioSource;
+    private AudioSource movementAudioSource;
 
     
     private SpriteRenderer _spriteRenderer;
@@ -46,6 +49,17 @@ public class PlayerBehavior : MonoBehaviour
             new GameObject("GameTimer").AddComponent<GameTimer>();
         }
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
+
+        movementAudioSource = gameObject.AddComponent<AudioSource>();
+        movementAudioSource.playOnAwake = false;
+        movementAudioSource.loop = true;
+        movementAudioSource.spatialBlend = 0f;
+        movementAudioSource.volume = audioSource.volume;
+        movementAudioSource.outputAudioMixerGroup = audioSource.outputAudioMixerGroup;
     }
 
     // Update is called once per frame
@@ -53,13 +67,14 @@ public class PlayerBehavior : MonoBehaviour
     {
         HandleInput();
         desiredDirection.Normalize();
+        UpdateMovementAudio();
         if (!isInvincible)
         {
             _animator.SetBool("isJumping", false);
         }
         if (isInvincible)
         {
-            //PlaySound(flapClip);
+            // Flight audio is managed as a loop by UpdateMovementAudio.
             _animator.SetBool("isJumping", true); 
         }
         else if (desiredDirection != Vector3.zero)
@@ -84,7 +99,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isStunned)
         {
-            PlaySound(bounceClip);
+            
             velocity += desiredDirection * accel * stunControl;
             currentStunnedTime += Time.deltaTime;
             if (currentStunnedTime > totalStunTime)
@@ -110,8 +125,54 @@ public class PlayerBehavior : MonoBehaviour
         }
         rb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
+    private void UpdateMovementAudio()
+    {
+        if (movementAudioSource == null) return;
+
+        AudioClip targetClip = null;
+        if (Time.timeScale > 0f && Keyboard.current != null && Application.isFocused)
+        {
+            bool flying = isInvincible && Keyboard.current.spaceKey.isPressed;
+            if (flying)
+                targetClip = flapClip;
+            else if (desiredDirection.sqrMagnitude > 0f && !isStunned)
+                targetClip = walkClip;
+        }
+
+        if (targetClip == null)
+        {
+            movementAudioSource.Stop();
+            movementAudioSource.clip = null;
+            return;
+        }
+
+        if (movementAudioSource.clip != targetClip)
+        {
+            movementAudioSource.Stop();
+            movementAudioSource.clip = targetClip;
+        }
+        if (!movementAudioSource.isPlaying)
+            movementAudioSource.Play();
+    }
+
+    private void OnDisable()
+    {
+        if (movementAudioSource != null) movementAudioSource.Stop();
+    }
+
     public void PlaySound(AudioClip clip)
     {
+        if (clip == null) return;
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 0f;
+        }
+
         audioSource.PlayOneShot(clip);
     }
 
@@ -125,6 +186,7 @@ public class PlayerBehavior : MonoBehaviour
             velocity = difference * 40;
             isStunned = true;
             currentStunnedTime = 0;
+            PlaySound(bounceClip);
         }
     }
 
