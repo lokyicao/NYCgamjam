@@ -60,8 +60,8 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationMethod: 0
-  spriteTessellationDetail: 0
-  spriteGeometrySubdivision: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -131,7 +131,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
       spriteID: cba37a42a1b37d380800000000000000
       internalID: -8946617151278073156
@@ -153,7 +153,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
       spriteID: a1996b69c09e82320800000000000000
       internalID: 2533531030673332506
@@ -165,7 +165,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dad568e256fc67642a6fc84521358597
+    spriteID: 9dddcc08872e88149b34ad01603acdde
     internalID: 0
     vertices: []
     indices: 
