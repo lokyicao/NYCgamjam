@@ -6,9 +6,15 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
+
+    // audio stuff
+    public AudioClip flapClip;
+    public AudioClip bounceClip;
+    private AudioSource audioSource;
+
     
     private SpriteRenderer _spriteRenderer;
-    float accel = 0.5f;
+    float accel = 0.25f;
     float stunControl = 0.5f;
     float rotationSpeed = 120f;
     
@@ -39,6 +45,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             new GameObject("GameTimer").AddComponent<GameTimer>();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +55,7 @@ public class PlayerBehavior : MonoBehaviour
         desiredDirection.Normalize();
         if (isStunned)
         {
+            PlaySound(bounceClip);
             velocity += desiredDirection * accel * stunControl;
             currentStunnedTime += Time.deltaTime;
             if (currentStunnedTime > totalStunTime)
@@ -61,7 +69,7 @@ public class PlayerBehavior : MonoBehaviour
             //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity) * Time.deltaTime;
         }
 
-        transform.position += velocity * Time.deltaTime;
+        //transform.position += velocity * Time.deltaTime;
 
         // Frame-rate independent exponential decay
         velocity *= Mathf.Exp(-friction * Time.deltaTime);
@@ -74,10 +82,12 @@ public class PlayerBehavior : MonoBehaviour
         Debug.Log($"{velocity}");
         if (isInvincible)
         {
+            PlaySound(flapClip);
             _animator.SetBool("isJumping", true); 
         }
         else if (desiredDirection != Vector3.zero)
         {
+            
             _animator.SetBool("isWalking", true);
         }
         else
@@ -92,6 +102,15 @@ public class PlayerBehavior : MonoBehaviour
     //{
     //    Debug.Log("Got Hittt");
     //}
+
+    void FixedUpdate()
+    {
+        rb.MovePosition(transform.position + velocity * Time.deltaTime);
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -140,52 +159,29 @@ public class PlayerBehavior : MonoBehaviour
             }
 
             desiredDirection = Vector3.zero;
-            if (sideKeysTurn)
-            {
-                if (Keyboard.current.wKey.isPressed)
-                {
-                    desiredDirection += transform.up;
-                }
-                if (Keyboard.current.sKey.isPressed)
-                {
-                    desiredDirection -= transform.up;
-                }
-                if (Keyboard.current.aKey.isPressed)
-                {
-                    transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-                }
-                if (Keyboard.current.dKey.isPressed)
-                {
-                    transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
-
-                }
-            } else
-            {
-                Vector3 up = cameraTransform != null
-                ? cameraTransform.up
-                : Vector3.up;
+            Vector3 up = cameraTransform != null
+            ? cameraTransform.up
+            : Vector3.up;
                 
-                Vector3 right = cameraTransform != null
-                    ? cameraTransform.right
-                    : Vector3.right;
+            Vector3 right = cameraTransform != null
+                ? cameraTransform.right
+                : Vector3.right;
 
-                if (Keyboard.current.wKey.isPressed)
-                    desiredDirection += up;
+            if (Keyboard.current.wKey.isPressed)
+                desiredDirection += up;
 
-                if (Keyboard.current.sKey.isPressed)
-                    desiredDirection -= up;
+            if (Keyboard.current.sKey.isPressed)
+                desiredDirection -= up;
 
-                if (Keyboard.current.aKey.isPressed){
-                    desiredDirection -= right;
-                    _spriteRenderer.flipX = true;
-                }
+            if (Keyboard.current.aKey.isPressed){
+                desiredDirection -= right;
+                _spriteRenderer.flipX = true;
+            }
 
 
-                if (Keyboard.current.dKey.isPressed){
-                    desiredDirection += right;
-                    _spriteRenderer.flipX = false;
-                }
-
+            if (Keyboard.current.dKey.isPressed){
+                desiredDirection += right;
+                _spriteRenderer.flipX = false;
             }
         }
     }
