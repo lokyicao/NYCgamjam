@@ -20,5 +20,6 @@ public class EnemyKiller : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        Debug.Log("killObject");
     }
 }

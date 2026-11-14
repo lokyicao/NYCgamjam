@@ -79,7 +79,6 @@ public class PlayerBehavior : MonoBehaviour
         {
             velocity = Vector3.zero;
         }
-        Debug.Log($"{velocity}");
         if (isInvincible)
         {
             PlaySound(flapClip);
