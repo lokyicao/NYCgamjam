@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    
-     private Transform player;
+    [Header("References")]
+    [SerializeField] private Transform player;
 
-    
-    private float followSpeed = 8f;
-    private float cameraZ = -10f;
+    [Header("Following")]
+    [SerializeField, Min(0f)] private float followSpeed = 8f;
+    [SerializeField] private float cameraZ = -10f;
 
     [Header("Turning")]
     [SerializeField, Min(0f)] private float rotationSpeed = 160f;
@@ -22,7 +22,7 @@ public class PlayerCamera : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogWarning("idk.", this);
+            Debug.LogWarning("PlayerCamera: assign the player Transform in the Inspector.", this);
             return;
         }
 
