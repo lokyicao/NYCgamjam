@@ -53,6 +53,10 @@ public class PlayerBehavior : MonoBehaviour
     {
         HandleInput();
         desiredDirection.Normalize();
+        if (!isInvincible)
+        {
+            _animator.SetBool("isJumping", false);
+        }
         if (isInvincible)
         {
             //PlaySound(flapClip);
