@@ -15,4 +15,11 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
+
+    public void SetDirection(Vector3 direction)
+    {
+        direction.Normalize();
+        this.direction = direction;
+        Debug.Log(direction);
+    }
 }

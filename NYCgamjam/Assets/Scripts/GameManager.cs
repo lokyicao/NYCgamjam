@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (objectToSpawn != null & Keyboard.current.fKey.wasPressedThisFrame)
-        {
-            Instantiate(objectToSpawn, transform.position, Quaternion.identity);
-        } 
+       //if (objectToSpawn != null & Keyboard.current.fKey.wasPressedThisFrame)
+       // {
+       //     Instantiate(objectToSpawn, transform.position, Quaternion.identity);
+       // } 
     }
 }
