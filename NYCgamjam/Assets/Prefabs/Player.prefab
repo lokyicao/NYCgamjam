@@ -110,8 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehavior
   cameraTransform: {fileID: 0}
   _animator: {fileID: 3794937295238910078}
-  flapClip: {fileID: 0}
-  bounceClip: {fileID: 0}
+  flapClip: {fileID: 8300000, guid: 690cf66d318ae814691dd389f81c065e, type: 3}
+  bounceClip: {fileID: 8300000, guid: b671c9640615eba4eb55660d4ba2ae30, type: 3}
 --- !u!61 &5192438697920668343
 BoxCollider2D:
   m_ObjectHideFlags: 0
