@@ -4,16 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    float accel = 1f;
+    float accel = 0.5f;
+    float stunControl = 0.5f;
     float rotationSpeed = 120f;
     Vector3 velocity = Vector3.zero;
-    float friction = 0.95f;
+    float friction = 20f;
     Vector3 desiredDirection = Vector3.zero;
     float terminalVelocity = 10f;
     bool isInvincible = false;
+    bool isStunned = false;
     float currentInvincibleTime = 0f;
+    float currentStunnedTime = 0f;
     float invincibleCoolDownTime;
     const float maxInvincibleTime = 2f;
+    const float totalStunTime = 0.5f;
 
     // determines if movement is rotational
     const bool sideKeysTurn = false;
@@ -32,9 +36,32 @@ public class PlayerBehavior : MonoBehaviour
         HandleInput();
         rb.simulated = !isInvincible;
         desiredDirection.Normalize();
-        velocity += desiredDirection * accel;
-        transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity) * Time.deltaTime;
-        velocity *= friction;
+        if (isStunned)
+        {
+            velocity += desiredDirection * accel * stunControl;
+            currentStunnedTime += Time.deltaTime;
+            if (currentStunnedTime > totalStunTime)
+            {
+                isStunned = false;
+            }
+            //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity * stunControl) * Time.deltaTime;
+            Debug.Log(currentStunnedTime);
+        } else
+        {
+            velocity += desiredDirection * accel;
+            //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity) * Time.deltaTime;
+        }
+
+        transform.position += velocity * Time.deltaTime;
+
+        // Frame-rate independent exponential decay
+        velocity *= Mathf.Exp(-friction * Time.deltaTime);
+
+        // Optional: Snap to zero when nearly stopped to prevent endless micro-sliding
+        if (velocity.sqrMagnitude < 0.001f)
+        {
+            velocity = Vector3.zero;
+        }
 
     }
 
@@ -63,7 +90,8 @@ public class PlayerBehavior : MonoBehaviour
         Vector3 difference = transform.position - other.gameObject.transform.position;
         difference.Normalize();
         velocity = difference * 50;
-
+        isStunned = true;
+        currentStunnedTime = 0;
     }
 
     void HandleInput()
@@ -89,7 +117,6 @@ public class PlayerBehavior : MonoBehaviour
                 }
                 invincibleCoolDownTime -= Time.deltaTime;
             }
-            Debug.Log(currentInvincibleTime + " " + invincibleCoolDownTime);
 
             desiredDirection = Vector3.zero;
             if (sideKeysTurn)
