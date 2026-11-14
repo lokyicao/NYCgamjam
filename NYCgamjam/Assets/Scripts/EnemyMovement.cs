@@ -20,6 +20,5 @@ public class EnemyMovement : MonoBehaviour
     {
         direction.Normalize();
         this.direction = direction;
-        Debug.Log(direction);
     }
 }

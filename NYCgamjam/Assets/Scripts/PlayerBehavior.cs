@@ -14,12 +14,12 @@ public class PlayerBehavior : MonoBehaviour
 
     
     private SpriteRenderer _spriteRenderer;
-    float accel = 0.25f;
+    float accel = 1.5f;
     float stunControl = 0.5f;
     float rotationSpeed = 120f;
     
     Vector3 velocity = Vector3.zero;
-    float friction = 20f;
+    float friction = 15f;
     Vector3 desiredDirection = Vector3.zero;
     float terminalVelocity = 10f;
     bool isInvincible = false;
@@ -53,6 +53,31 @@ public class PlayerBehavior : MonoBehaviour
     {
         HandleInput();
         desiredDirection.Normalize();
+        if (isInvincible)
+        {
+            //PlaySound(flapClip);
+            _animator.SetBool("isJumping", true); 
+        }
+        else if (desiredDirection != Vector3.zero)
+        {
+            
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
+        }
+
+
+    }
+
+    //private void OnTriggerEnter2d(Collider2D c)
+    //{
+    //    Debug.Log("Got Hittt");
+    //}
+
+    void FixedUpdate()
+    {
         if (isStunned)
         {
             PlaySound(bounceClip);
@@ -79,31 +104,6 @@ public class PlayerBehavior : MonoBehaviour
         {
             velocity = Vector3.zero;
         }
-        if (isInvincible)
-        {
-            PlaySound(flapClip);
-            _animator.SetBool("isJumping", true); 
-        }
-        else if (desiredDirection != Vector3.zero)
-        {
-            
-            _animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            _animator.SetBool("isWalking", false);
-        }
-
-
-    }
-
-    //private void OnTriggerEnter2d(Collider2D c)
-    //{
-    //    Debug.Log("Got Hittt");
-    //}
-
-    void FixedUpdate()
-    {
         rb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
     public void PlaySound(AudioClip clip)
