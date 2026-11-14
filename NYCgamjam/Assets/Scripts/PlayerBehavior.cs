@@ -34,6 +34,11 @@ public class PlayerBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (GameTimer.Instance == null)
+        {
+            new GameObject("GameTimer").AddComponent<GameTimer>();
+        }
     }
 
     // Update is called once per frame
