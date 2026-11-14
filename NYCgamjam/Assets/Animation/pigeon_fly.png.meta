@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: b88eb72e7081af941a3cdc18884d1f3d
+guid: addc0b9bfef704f48b56a4b9e87cec0b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4770441568271114759
-    second: pigeon_jump_0
+      213: -3363312449122812684
+    second: pigeon_fly_0
   - first:
-      213: -235545037792304822
-    second: pigeon_jump_1
+      213: 8845707704007403913
+    second: pigeon_fly_1
   - first:
-      213: 6209131788054437234
-    second: pigeon_jump_2
+      213: 6302097083909119103
+    second: pigeon_fly_2
   - first:
-      213: 4630226833513073674
-    second: pigeon_jump_3
+      213: -6346306496639423439
+    second: pigeon_fly_3
   - first:
-      213: -6881938207059430726
-    second: pigeon_jump_4
+      213: -7619688293233961471
+    second: pigeon_fly_4
   - first:
-      213: 6934524474357573339
-    second: pigeon_jump_5
+      213: 2782913226862475283
+    second: pigeon_fly_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -130,7 +130,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pigeon_jump_0
+      name: pigeon_fly_0
       rect:
         serializedVersion: 2
         x: 0
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9fd51752bacfbcdb0800000000000000
-      internalID: -4770441568271114759
+      spriteID: 4fcb269a52d1351d0800000000000000
+      internalID: -3363312449122812684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pigeon_jump_1
+      name: pigeon_fly_1
       rect:
         serializedVersion: 2
         x: 32
@@ -167,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a41a8cd390d2bbcf0800000000000000
-      internalID: -235545037792304822
+      spriteID: 9892c4c4a4442ca70800000000000000
+      internalID: 8845707704007403913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pigeon_jump_2
+      name: pigeon_fly_2
       rect:
         serializedVersion: 2
         x: 64
@@ -189,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27d129eb6744b2650800000000000000
-      internalID: 6209131788054437234
+      spriteID: f7c9d6a68eb857750800000000000000
+      internalID: 6302097083909119103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pigeon_jump_3
+      name: pigeon_fly_3
       rect:
         serializedVersion: 2
         x: 96
@@ -211,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a0c4709e5ced14040800000000000000
-      internalID: 4630226833513073674
+      spriteID: 13cad009dd36de7a0800000000000000
+      internalID: -6346306496639423439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pigeon_jump_4
+      name: pigeon_fly_4
       rect:
         serializedVersion: 2
         x: 128
@@ -233,14 +233,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab2b80aa9a17e70a0800000000000000
-      internalID: -6881938207059430726
+      spriteID: 106569e3edd614690800000000000000
+      internalID: -7619688293233961471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pigeon_jump_5
+      name: pigeon_fly_5
       rect:
         serializedVersion: 2
         x: 160
@@ -255,8 +255,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd6e55cc4416c3060800000000000000
-      internalID: 6934524474357573339
+      spriteID: 318bfd7d5d4ee9620800000000000000
+      internalID: 2782913226862475283
       vertices: []
       indices: 
       edges: []
@@ -265,7 +265,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3b9b407fcd6230f4394cdf076aa525ae
+    spriteID: 5f5700e2bfa08734c980896f4c557b6d
     internalID: 0
     vertices: []
     indices: 
@@ -277,12 +277,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      pigeon_jump_0: -4770441568271114759
-      pigeon_jump_1: -235545037792304822
-      pigeon_jump_2: 6209131788054437234
-      pigeon_jump_3: 4630226833513073674
-      pigeon_jump_4: -6881938207059430726
-      pigeon_jump_5: 6934524474357573339
+      pigeon_fly_0: -3363312449122812684
+      pigeon_fly_1: 8845707704007403913
+      pigeon_fly_2: 6302097083909119103
+      pigeon_fly_3: -6346306496639423439
+      pigeon_fly_4: -7619688293233961471
+      pigeon_fly_5: 2782913226862475283
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
