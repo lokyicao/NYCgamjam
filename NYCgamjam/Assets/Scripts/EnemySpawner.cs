@@ -5,8 +5,12 @@ using UnityEngine.TestTools;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyToSpawn;
+    public Vector3 enemyMoveDirection;
     Vector3 minPos;
     Vector3 maxPos;
+    const float spawnCooldown = 2f;
+    float timeSinceSpawn;
+    bool isActive = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,8 +23,10 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyToSpawn != null & Keyboard.current.fKey.wasPressedThisFrame)
+        timeSinceSpawn += Time.deltaTime;
+        if (isActive && timeSinceSpawn > spawnCooldown)
         {
+            timeSinceSpawn = 0;
             SpawnEnemy();
         }
     }
@@ -28,7 +34,8 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 pos = GetPosInRange();
-        Instantiate(enemyToSpawn, pos, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemyToSpawn, pos, Quaternion.identity);
+        newEnemy.GetComponent<EnemyMovement>().SetDirection(enemyMoveDirection);
     }
 
     Vector3 GetPosInRange()
