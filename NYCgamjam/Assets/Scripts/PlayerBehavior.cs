@@ -75,15 +75,15 @@ public class PlayerBehavior : MonoBehaviour
         {
             _animator.SetBool("isJumping", false);
             alpha = 1f;
-            sr.size = new Vector2(1f, 1f);
+            transform.localScale = new Vector2(1f, 1f);
         }
         if (isInvincible)
         {
             // Flight audio is managed as a loop by UpdateMovementAudio.
             _animator.SetBool("isJumping", true);
-            alpha = 0.75f;
-            sr.size = new Vector2(1.25f, 1.25f);
-            Debug.Log(sr.size);
+            alpha = 0.9f;
+            float scaleUp = 1f + Mathf.Clamp(currentInvincibleTime * 2, 0f, 0.2f);
+            transform.localScale = new Vector2(scaleUp, scaleUp);
         }
         else if (desiredDirection != Vector3.zero)
         {
@@ -97,7 +97,6 @@ public class PlayerBehavior : MonoBehaviour
         Color color = sr.color;
         color.a = alpha;
         sr.color = color;
-        sr.size = new Vector2(3f, 3f);
     }
 
     //private void OnTriggerEnter2d(Collider2D c)
