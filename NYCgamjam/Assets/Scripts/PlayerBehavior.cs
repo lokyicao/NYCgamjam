@@ -19,6 +19,7 @@ public class PlayerBehavior : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     float accel = 1.5f;
     float stunControl = 0.5f;
+    float flyControl = 1.5f;
     float rotationSpeed = 120f;
     
     Vector3 velocity = Vector3.zero;
@@ -35,13 +36,14 @@ public class PlayerBehavior : MonoBehaviour
     const float totalStunTime = 0.5f;
 
     // determines if movement is rotational
-    const bool sideKeysTurn = false;
 
     Rigidbody2D rb;
+    SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (GameTimer.Instance == null)
@@ -68,14 +70,20 @@ public class PlayerBehavior : MonoBehaviour
         HandleInput();
         desiredDirection.Normalize();
         UpdateMovementAudio();
+        float alpha = 1f;
         if (!isInvincible)
         {
             _animator.SetBool("isJumping", false);
+            alpha = 1f;
+            sr.size = new Vector2(1f, 1f);
         }
         if (isInvincible)
         {
             // Flight audio is managed as a loop by UpdateMovementAudio.
-            _animator.SetBool("isJumping", true); 
+            _animator.SetBool("isJumping", true);
+            alpha = 0.75f;
+            sr.size = new Vector2(1.25f, 1.25f);
+            Debug.Log(sr.size);
         }
         else if (desiredDirection != Vector3.zero)
         {
@@ -86,8 +94,10 @@ public class PlayerBehavior : MonoBehaviour
         {
             _animator.SetBool("isWalking", false);
         }
-
-
+        Color color = sr.color;
+        color.a = alpha;
+        sr.color = color;
+        sr.size = new Vector2(3f, 3f);
     }
 
     //private void OnTriggerEnter2d(Collider2D c)
@@ -99,18 +109,19 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isStunned)
         {
-            
             velocity += desiredDirection * accel * stunControl;
             currentStunnedTime += Time.deltaTime;
             if (currentStunnedTime > totalStunTime)
             {
                 isStunned = false;
             }
-            //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity * stunControl) * Time.deltaTime;
+        } else if (isInvincible)
+        {
+         
+            velocity += desiredDirection * accel * flyControl;
         } else
         {
             velocity += desiredDirection * accel;
-            //transform.position += Vector3.ClampMagnitude(velocity, terminalVelocity) * Time.deltaTime;
         }
 
         //transform.position += velocity * Time.deltaTime;
