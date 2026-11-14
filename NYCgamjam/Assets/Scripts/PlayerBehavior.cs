@@ -6,6 +6,12 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
+
+    // audio stuff
+    public AudioClip flapClip;
+    public AudioClip bounceClip;
+    private AudioSource audioSource;
+
     
     private SpriteRenderer _spriteRenderer;
     float accel = 0.25f;
@@ -39,6 +45,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             new GameObject("GameTimer").AddComponent<GameTimer>();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +55,7 @@ public class PlayerBehavior : MonoBehaviour
         desiredDirection.Normalize();
         if (isStunned)
         {
+            PlaySound(bounceClip);
             velocity += desiredDirection * accel * stunControl;
             currentStunnedTime += Time.deltaTime;
             if (currentStunnedTime > totalStunTime)
@@ -74,10 +82,12 @@ public class PlayerBehavior : MonoBehaviour
         Debug.Log($"{velocity}");
         if (isInvincible)
         {
+            PlaySound(flapClip);
             _animator.SetBool("isJumping", true); 
         }
         else if (desiredDirection != Vector3.zero)
         {
+            
             _animator.SetBool("isWalking", true);
         }
         else
@@ -96,6 +106,10 @@ public class PlayerBehavior : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(transform.position + velocity * Time.deltaTime);
+    }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
     void OnTriggerEnter2D(Collider2D other)
