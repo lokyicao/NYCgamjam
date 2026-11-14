@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    [SerializeField] private Transform cameraTransform;
     float accel = 0.5f;
     float stunControl = 0.5f;
     float rotationSpeed = 120f;
@@ -139,22 +140,25 @@ public class PlayerBehavior : MonoBehaviour
                 }
             } else
             {
+                Vector3 up = cameraTransform != null
+                ? cameraTransform.up
+                : Vector3.up;
+                
+                Vector3 right = cameraTransform != null
+                    ? cameraTransform.right
+                    : Vector3.right;
+
                 if (Keyboard.current.wKey.isPressed)
-                {
-                    desiredDirection += Vector3.up;
-                }
+                    desiredDirection += up;
+
                 if (Keyboard.current.sKey.isPressed)
-                {
-                    desiredDirection += Vector3.down;
-                }
+                    desiredDirection -= up;
+
                 if (Keyboard.current.aKey.isPressed)
-                {
-                    desiredDirection += Vector3.left;
-                }
+                    desiredDirection -= right;
+
                 if (Keyboard.current.dKey.isPressed)
-                {
-                    desiredDirection += Vector3.right;
-                }
+                    desiredDirection += right;
             }
         }
     }
