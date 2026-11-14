@@ -5,15 +5,18 @@ using UnityEngine.InputSystem;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Animator _animator;
     float accel = 0.5f;
     float stunControl = 0.5f;
     float rotationSpeed = 120f;
+    
     Vector3 velocity = Vector3.zero;
     float friction = 20f;
     Vector3 desiredDirection = Vector3.zero;
     float terminalVelocity = 10f;
     bool isInvincible = false;
     bool isStunned = false;
+    bool isJumping = false;
     float currentInvincibleTime = 0f;
     float currentStunnedTime = 0f;
     float invincibleCoolDownTime;
@@ -62,6 +65,19 @@ public class PlayerBehavior : MonoBehaviour
             velocity = Vector3.zero;
         }
         Debug.Log($"{velocity}");
+        if (isInvincible)
+        {
+            _animator.SetBool("isJumping", true); 
+        }
+        else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
+        }
+
 
     }
 
