@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     Vector3 GetPosInRange()
     {
         float x = Mathf.Floor((int)Random.Range(minPos.x, maxPos.x)) - 0.5f;
-        float y = Mathf.Floor((int)Random.Range(minPos.y, maxPos.y)) - 0.5f;
+        float y = Mathf.Floor((int)Random.Range(minPos.y, maxPos.y)) + 0.5f;
         return new Vector3(x, y, 0);
     }
 }
