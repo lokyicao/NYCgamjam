@@ -6,6 +6,8 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
+    
+    private SpriteRenderer _spriteRenderer;
     float accel = 0.5f;
     float stunControl = 0.5f;
     float rotationSpeed = 120f;
@@ -31,6 +33,7 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             _animator.SetBool("isJumping", true); 
         }
-        else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        else if (desiredDirection != Vector3.zero)
         {
             _animator.SetBool("isWalking", true);
         }
@@ -152,6 +155,7 @@ public class PlayerBehavior : MonoBehaviour
                 if (Keyboard.current.dKey.isPressed)
                 {
                     transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
+
                 }
             } else
             {
@@ -169,11 +173,17 @@ public class PlayerBehavior : MonoBehaviour
                 if (Keyboard.current.sKey.isPressed)
                     desiredDirection -= up;
 
-                if (Keyboard.current.aKey.isPressed)
+                if (Keyboard.current.aKey.isPressed){
                     desiredDirection -= right;
+                    _spriteRenderer.flipX = true;
+                }
 
-                if (Keyboard.current.dKey.isPressed)
+
+                if (Keyboard.current.dKey.isPressed){
                     desiredDirection += right;
+                    _spriteRenderer.flipX = false;
+                }
+
             }
         }
     }
