@@ -45,7 +45,6 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         HandleInput();
-        rb.simulated = !isInvincible;
         desiredDirection.Normalize();
         if (isStunned)
         {
@@ -96,12 +95,12 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (!isInvincible && other.CompareTag("Enemy"))
         {
             Debug.Log("ouch!!");
             Vector3 difference = transform.position - other.gameObject.transform.position;
             difference.Normalize();
-            velocity = difference * 50;
+            velocity = difference * 40;
             isStunned = true;
             currentStunnedTime = 0;
         }
