@@ -276,6 +276,11 @@ public class PlayerBehavior : MonoBehaviour
                 desiredDirection += right;
                 _spriteRenderer.flipX = false;
             }
+
+            if(Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            }
         }
     }
 }
