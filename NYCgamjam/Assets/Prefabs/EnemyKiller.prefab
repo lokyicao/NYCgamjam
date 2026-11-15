@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3605390534124713130}
   - component: {fileID: 3354112869953371471}
   - component: {fileID: 1406247086445241080}
-  - component: {fileID: 49212233500178291}
   m_Layer: 0
   m_Name: EnemyKiller
   m_TagString: Untagged
@@ -87,21 +86,8 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964510866678789569}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9653746389e0cf543b3f082d5ce2ca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyToKill: {fileID: 0}
---- !u!114 &49212233500178291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964510866678789569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c948f2825eb44cdaf67172dc95bf01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GlobalKiller

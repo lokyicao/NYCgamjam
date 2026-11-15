@@ -1,15 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
-    public Image staminabar;
-    float amount = 1f;
 
     // audio stuff
     public AudioClip walkClip;
@@ -33,8 +30,9 @@ public class PlayerBehavior : MonoBehaviour
     bool isStunned = false;
     bool isJumping = false;
     float currentInvincibleTime = 0f;
-    public float invincibleTimeMeter { get; private set; } = maxInvincibleTime;
+    public float invincibleTimeMeter { get; private set; } = 2f;
     float currentStunnedTime = 0f;
+    float invincibleCoolDownTime;
     const float maxInvincibleTime = 2f;
     const float totalStunTime = 0.5f;
 
@@ -85,7 +83,7 @@ public class PlayerBehavior : MonoBehaviour
             // Flight audio is managed as a loop by UpdateMovementAudio.
             _animator.SetBool("isJumping", true);
             alpha = 0.9f;
-            float scaleUp = 1f + Mathf.Clamp(currentInvincibleTime, 0f, 0.05f);
+            float scaleUp = 1f + Mathf.Clamp(currentInvincibleTime * 2, 0f, 0.1f);
             transform.localScale = new Vector2(scaleUp, scaleUp);
         }
         else if (desiredDirection != Vector3.zero)
@@ -100,10 +98,6 @@ public class PlayerBehavior : MonoBehaviour
         Color color = sr.color;
         color.a = alpha;
         sr.color = color;
-
-        amount = invincibleTimeMeter / maxInvincibleTime;
-
-        staminabar.fillAmount = amount;
     }
 
     //private void OnTriggerEnter2d(Collider2D c)
@@ -195,7 +189,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isInvincible && (other.CompareTag("Rat")|| other.CompareTag("Human")|| other.CompareTag("Car")|| other.CompareTag("Cat")))
+        if (!isInvincible && other.CompareTag("Enemy"))
         {
             Debug.Log("ouch!!");
             Vector3 difference = transform.position - other.gameObject.transform.position;
@@ -206,6 +200,11 @@ public class PlayerBehavior : MonoBehaviour
             PlaySound(bounceClip);
         }
     }
+
+    //void OnColliderEnter2D(Collider2D other)
+    //{
+    //    Debug.Log("Ouch bro");
+    //}
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -223,10 +222,8 @@ public class PlayerBehavior : MonoBehaviour
                 } else
                 {
                     invincibleTimeMeter -= Time.deltaTime;
-                    currentInvincibleTime += Time.deltaTime;
                 }
                 
-
             } else
             {
                 if (invincibleTimeMeter > 0 && Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -235,9 +232,10 @@ public class PlayerBehavior : MonoBehaviour
                 } else
                 {
                     invincibleTimeMeter += Time.deltaTime / 2;
-                    invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, maxInvincibleTime);
+                    invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, 2f);
                 }
             }
+            Debug.Log(invincibleTimeMeter);
 
             desiredDirection = Vector3.zero;
             Vector3 up = cameraTransform != null

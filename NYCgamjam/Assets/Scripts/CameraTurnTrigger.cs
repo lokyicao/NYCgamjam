@@ -5,6 +5,7 @@ public class CameraTurnTrigger : MonoBehaviour
 {
     [SerializeField] private PlayerCamera playerCamera;
 
+    [Tooltip("Absolute camera Z rotation: 0, 90, 180, or 270.")]
     [SerializeField] private float streetAngle;
 
     private void Reset()
