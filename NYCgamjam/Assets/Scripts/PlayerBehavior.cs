@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
     public Image staminabar;
+    public Canvas canvas;
     float amount = 1f;
 
     // audio stuff
@@ -104,6 +105,18 @@ public class PlayerBehavior : MonoBehaviour
         amount = invincibleTimeMeter / maxInvincibleTime;
 
         staminabar.fillAmount = amount;
+        if (canvas != null)
+        {
+            if (amount == 1f)
+            {
+                canvas.enabled = false;
+            } else
+            {
+                canvas.enabled = true;
+            
+            }
+        }
+
     }
 
     //private void OnTriggerEnter2d(Collider2D c)

@@ -5045,6 +5045,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7927996026883362319, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1200490210}
+    - target: {fileID: 7927996026883362319, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
       propertyPath: staminabar
       value: 
       objectReference: {fileID: 507302873}
@@ -8244,6 +8248,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!223 &1200490210 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6779836833808840826, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
+  m_PrefabInstance: {fileID: 351870414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1887861813
 GameObject:
   m_ObjectHideFlags: 0
