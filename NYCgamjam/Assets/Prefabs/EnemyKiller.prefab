@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9653746389e0cf543b3f082d5ce2ca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  enemyToKill: {fileID: 0}
+  enemyToKill: {fileID: 301482378810829367, guid: 1b536af693dac774d923b9bc00a70529, type: 3}
 --- !u!114 &49212233500178291
 MonoBehaviour:
   m_ObjectHideFlags: 0
