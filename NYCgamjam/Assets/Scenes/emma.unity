@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!223 &3228616 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 6779836833808840826, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
+  m_PrefabInstance: {fileID: 5937311480434041648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &177212732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -445,6 +450,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 49212233500178291, guid: 9b5f1aae439c32f44af99f27dbd87e19, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406247086445241080, guid: 9b5f1aae439c32f44af99f27dbd87e19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406247086445241080, guid: 9b5f1aae439c32f44af99f27dbd87e19, type: 3}
+      propertyPath: enemyToKill
+      value: 
+      objectReference: {fileID: 8922620200752256216, guid: 8f3d21ed75e897f45ba8ba1292952685, type: 3}
     - target: {fileID: 1964510866678789569, guid: 9b5f1aae439c32f44af99f27dbd87e19, type: 3}
       propertyPath: m_Name
       value: EnemyKiller (3)
@@ -19488,7 +19505,7 @@ PrefabInstance:
       objectReference: {fileID: 5572700938647968420, guid: 5aa8e55678bec924c8b8ffbf24b325ca, type: 3}
     - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
       propertyPath: spawnCooldown
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
       propertyPath: enemiesToSpawn.Array.size
@@ -19896,6 +19913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7927996026883362319, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 3228616}
     - target: {fileID: 7927996026883362319, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
       propertyPath: _animator
       value: 
