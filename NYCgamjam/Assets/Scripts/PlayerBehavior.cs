@@ -1,12 +1,15 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Animator _animator;
+    public Image staminabar;
+    float amount = 1f;
 
     // audio stuff
     public AudioClip walkClip;
@@ -97,6 +100,10 @@ public class PlayerBehavior : MonoBehaviour
         Color color = sr.color;
         color.a = alpha;
         sr.color = color;
+
+        amount = invincibleTimeMeter / maxInvincibleTime;
+
+        staminabar.fillAmount = amount;
     }
 
     //private void OnTriggerEnter2d(Collider2D c)
@@ -219,6 +226,7 @@ public class PlayerBehavior : MonoBehaviour
                     currentInvincibleTime += Time.deltaTime;
                 }
                 
+
             } else
             {
                 if (invincibleTimeMeter > 0 && Keyboard.current.spaceKey.wasPressedThisFrame)

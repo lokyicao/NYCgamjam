@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 946008971}
   - component: {fileID: 946008970}
   - component: {fileID: 946008969}
+  - component: {fileID: 946008973}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -301,6 +302,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &946008973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946008968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d1472c362bd744782cc06d4c9378f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::button
 --- !u!1 &998664182
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +326,7 @@ GameObject:
   - component: {fileID: 998664186}
   - component: {fileID: 998664185}
   - component: {fileID: 998664184}
+  - component: {fileID: 998664187}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -384,9 +398,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 102900000, guid: 8f366eb4eafea463b8b5f0535e83da8d, type: 3}
-        m_TargetAssemblyTypeName: UnityEditor.SceneAsset, UnityEditor.CoreModule
-        m_MethodName: 
+      - m_Target: {fileID: 946008973}
+        m_TargetAssemblyTypeName: button, Assembly-CSharp
+        m_MethodName: OnStartClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -434,6 +448,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998664182}
   m_CullTransparentMesh: 1
+--- !u!114 &998664187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998664182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d1472c362bd744782cc06d4c9378f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1208412702
 GameObject:
   m_ObjectHideFlags: 0
