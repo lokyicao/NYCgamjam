@@ -1,9 +1,11 @@
+//using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TestTools;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private GameObject[] enemiesToSpawn;
     public GameObject enemyToSpawn;
     public Vector3 enemyMoveDirection;
     Vector3 minPos;
@@ -27,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
         timeSinceSpawn += Time.deltaTime;
         if (isActive && timeSinceSpawn > spawnCooldown)
         {
+            
             timeSinceSpawn = 0;
             SpawnEnemy();
         }
@@ -35,6 +38,17 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 pos = GetPosInRange();
+        
+        
+        if (enemiesToSpawn != null && enemiesToSpawn.Length > 0)
+        {
+            int num = Random.Range(0, enemiesToSpawn.Length); 
+            Debug.Log("enemiesToSpawn.Length: " + enemiesToSpawn.Length);  
+            Debug.Log("num: " + num);
+            enemyToSpawn = enemiesToSpawn[num]; 
+        }
+
+        
         GameObject newEnemy = Instantiate(enemyToSpawn, pos, enemyToSpawn.transform.rotation);
         newEnemy.GetComponent<EnemyMovement>().SetDirection(enemyMoveDirection);
     }

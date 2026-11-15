@@ -18588,12 +18588,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1597336375}
     - target: {fileID: 6252112672322694316, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
+      propertyPath: timeDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6252112672322694316, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
       propertyPath: enemyToSpawn
       value: 
       objectReference: {fileID: 1065542108}
     - target: {fileID: 6252112672322694316, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
       propertyPath: spawnCooldown
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6344301353259478863, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
       propertyPath: enemyToSpawn
@@ -19444,7 +19448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864796709952976476, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59.7
+      value: 21.6
       objectReference: {fileID: 0}
     - target: {fileID: 7864796709952976476, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19478,6 +19482,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 5572700938647968420, guid: 5aa8e55678bec924c8b8ffbf24b325ca, type: 3}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: spawnCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: enemiesToSpawn.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: 'enemiesToSpawn.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5572700938647968420, guid: c7c3fbc7396dae44d9058bdfb41354b4, type: 3}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: 'enemiesToSpawn.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5572700938647968420, guid: 5aa8e55678bec924c8b8ffbf24b325ca, type: 3}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: 'enemiesToSpawn.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5572700938647968420, guid: 80f8514fbaf8d1d478061e2dfe73e012, type: 3}
+    - target: {fileID: 8942739249193690449, guid: c77478d9bd2138947b3a6b0c5d2976ee, type: 3}
+      propertyPath: 'enemiesToSpawn.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5572700938647968420, guid: ef0a65692c203b44ab8789f794658e47, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
