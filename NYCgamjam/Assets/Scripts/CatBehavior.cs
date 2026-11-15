@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -43,6 +44,10 @@ public class CatBehavior : MonoBehaviour
             if (Vector2.Distance(transform.position, playerPos) > pursuitRange)
             {
                 isChasing = false;
+                isWaiting = true;
+                isStartingJump = false;
+                isMidair = false;
+                isLanding = false;
             } else
             {
                 if (isWaiting)
@@ -113,10 +118,11 @@ public class CatBehavior : MonoBehaviour
             
     }
 
-    Vector3 GetRandomPos()
+    void Update()
     {
-        float x = Random.Range(startPos.x - pursuitRange, startPos.x + pursuitRange);
-        float y = Random.Range(startPos.y - pursuitRange, startPos.y + pursuitRange);
-        return new Vector3(x, y, 0);
+        _animator.SetBool("isWaiting", isWaiting);
+        _animator.SetBool("isStartingJump", isStartingJump);
+        _animator.SetBool("isMidair", isMidair);
+        _animator.SetBool("isLanding", isLanding);
     }
 }
