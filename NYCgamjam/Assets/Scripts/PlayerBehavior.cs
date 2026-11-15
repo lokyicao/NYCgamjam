@@ -17,9 +17,9 @@ public class PlayerBehavior : MonoBehaviour
 
     
     private SpriteRenderer _spriteRenderer;
-    float accel = 1.5f;
+    float accel = 1.25f;
     float stunControl = 0.5f;
-    float flyControl = 1.5f;
+    float flyControl = 1.75f;
     float rotationSpeed = 120f;
     
     Vector3 velocity = Vector3.zero;
@@ -30,6 +30,7 @@ public class PlayerBehavior : MonoBehaviour
     bool isStunned = false;
     bool isJumping = false;
     float currentInvincibleTime = 0f;
+    public float invincibleTimeMeter { get; private set; } = 2f;
     float currentStunnedTime = 0f;
     float invincibleCoolDownTime;
     const float maxInvincibleTime = 2f;
@@ -213,25 +214,27 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (Keyboard.current != null)
         {
-            isInvincible = false;
-            if (invincibleCoolDownTime <= 0 && Keyboard.current.spaceKey.isPressed)
+            if (isInvincible)
             {
-                isInvincible = true;
-                currentInvincibleTime += Time.deltaTime;
-                if (currentInvincibleTime > maxInvincibleTime)
+                if (invincibleTimeMeter <= 0 || !Keyboard.current.spaceKey.isPressed)
                 {
-                    invincibleCoolDownTime = currentInvincibleTime * 2;
-                    currentInvincibleTime = 0;
+                    isInvincible = false;
+                } else
+                {
+                    invincibleTimeMeter -= Time.deltaTime;
                 }
+                
             } else
             {
-                if (currentInvincibleTime > 0)
+                if (invincibleTimeMeter > 0 && Keyboard.current.spaceKey.wasPressedThisFrame)
                 {
-                    invincibleCoolDownTime = currentInvincibleTime * 2;
-                    currentInvincibleTime = 0;
+                    isInvincible = true;
+                } else
+                {
+                    invincibleTimeMeter += Time.deltaTime / 2;
                 }
-                invincibleCoolDownTime -= Time.deltaTime;
             }
+            Debug.Log(invincibleTimeMeter);
 
             desiredDirection = Vector3.zero;
             Vector3 up = cameraTransform != null
