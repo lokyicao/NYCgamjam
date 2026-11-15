@@ -15,7 +15,7 @@ public class GlobalKiller : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Rat") || other.CompareTag("Human") || other.CompareTag("Car") || other.CompareTag("Cat"))
+        if (other.CompareTag("Rat") || other.CompareTag("Human") || other.CompareTag("Car"))
         {
             Destroy(other.gameObject);
         }
