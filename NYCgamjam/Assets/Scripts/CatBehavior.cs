@@ -41,70 +41,77 @@ public class CatBehavior : MonoBehaviour
 
         if (isChasing)
         {
-            if (Vector2.Distance(transform.position, playerPos) > pursuitRange)
+            if (isWaiting)
             {
-                isChasing = false;
-                isWaiting = true;
-                isStartingJump = false;
-                isMidair = false;
-                isLanding = false;
-            } else
-            {
-                if (isWaiting)
+                timeBeforeNextAction -= Time.deltaTime;
+                if (timeBeforeNextAction <= 0)
                 {
-                    timeBeforeNextAction -= Time.deltaTime;
-                    if (timeBeforeNextAction <= 0)
+                    if (Vector2.Distance(transform.position, startPos) > pursuitRange)
+                    {
+                        isWaiting = false;
+                        isStartingJump = true;
+                        targetPos = startPos;
+                        prevPos = transform.position;
+                        sr.flipX = (targetPos.x - transform.position.x < 0);
+                    } else
                     {
                         isWaiting = false;
                         isStartingJump = true;
                         timeBeforeNextAction = preJumpWaitTime;
                         Debug.Log("startJump");
                     }
-                } else if (isStartingJump)
+                }
+            } else if (isStartingJump)
+            {
+                timeBeforeNextAction -= Time.deltaTime;
+                if (timeBeforeNextAction <= 0)
                 {
-                    timeBeforeNextAction -= Time.deltaTime;
-                    if (timeBeforeNextAction <= 0)
-                    {
-                        isMidair = true;
-                        isStartingJump = false;
-                        Debug.Log("startMidair");
-                    }
-                } else if (isLanding)
+                    isMidair = true;
+                    isStartingJump = false;
+                    Debug.Log("startMidair");
+                }
+            } else if (isLanding)
+            {
+                timeBeforeNextAction -= Time.deltaTime;
+                if (timeBeforeNextAction <= 0)
                 {
-                    timeBeforeNextAction -= Time.deltaTime;
-                    if (timeBeforeNextAction <= 0)
-                    {
-                        isWaiting = true;
-                        isLanding = false;
-                        timeBeforeNextAction = waitTime;
-                        Debug.Log("startLand");
-                    }
-                } else
+                    isWaiting = true;
+                    isLanding = false;
+                    timeBeforeNextAction = waitTime;
+                    Debug.Log("startLand");
+                }
+            } else
+            {
+                if (Vector2.Distance(transform.position, targetPos) == 0)
                 {
-                    if (Vector2.Distance(transform.position, targetPos) == 0)
+                    targetPos = playerPos;
+                    prevPos = transform.position;
+                    sr.flipX = (targetPos.x - transform.position.x < 0);
+                }
+                else
+                {
+                    Vector2 moveAmount = (targetPos - prevPos) * Time.deltaTime / jumpTime;
+                    transform.position += new Vector3(moveAmount.x, moveAmount.y, 0);
+                    if (Vector2.Distance(transform.position, targetPos) < moveAmount.magnitude)
                     {
-                        targetPos = playerPos;
-                        prevPos = transform.position;
-                    }
-                    else
-                    {
-                        Vector2 moveAmount = (targetPos - prevPos) * Time.deltaTime / jumpTime;
-                        transform.position += new Vector3(moveAmount.x, moveAmount.y, 0);
-                        if (Vector2.Distance(transform.position, targetPos) < moveAmount.magnitude)
+                        transform.position = new Vector3(targetPos.x, targetPos.y, 0);
+                        if (targetPos == startPos) {
+                            isWaiting = true;
+                            isMidair = false;
+                            isChasing = false;
+                        } else
                         {
-                            transform.position = new Vector3(targetPos.x, targetPos.y, 0);
                             isMidair = false;
                             isLanding = true;
                             timeBeforeNextAction = preJumpWaitTime;
                             Debug.Log("StartWait");
                         }
+                        
                     }
                 }
-                
             }
         } else
         {
-            transform.position = startPos;
             if (Vector2.Distance(transform.position, playerPos) < aggroRange)
             {
                 isChasing = true;
@@ -120,9 +127,10 @@ public class CatBehavior : MonoBehaviour
 
     void Update()
     {
-        _animator.SetBool("isWaiting", isWaiting);
+        _animator.SetBool("isWaiting", isWaiting || !isChasing);
         _animator.SetBool("isStartingJump", isStartingJump);
-        _animator.SetBool("isMidair", isMidair);
+        _animator.SetBool("isMidair", isMidair && isChasing);
         _animator.SetBool("isLanding", isLanding);
+        Debug.Log(transform.position);
     }
 }
