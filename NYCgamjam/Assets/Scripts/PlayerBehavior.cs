@@ -113,7 +113,6 @@ public class PlayerBehavior : MonoBehaviour
             } else
             {
                 canvas.enabled = true;
-            
             }
         }
 
@@ -206,7 +205,7 @@ public class PlayerBehavior : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (!isInvincible && (other.CompareTag("Rat")|| other.CompareTag("Human")|| other.CompareTag("Car")|| other.CompareTag("Cat")))
         {
