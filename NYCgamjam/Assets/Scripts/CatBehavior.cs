@@ -3,6 +3,7 @@ using UnityEngine.TestTools;
 
 public class CatBehavior : MonoBehaviour
 {
+    [SerializeField] public Animator _animator;
     Vector3 startPos, prevPos, targetPos;
     public float pursuitRange = 8f;
     float aggroRange = 4f;
@@ -102,6 +103,11 @@ public class CatBehavior : MonoBehaviour
             if (Vector2.Distance(transform.position, playerPos) < aggroRange)
             {
                 isChasing = true;
+                isWaiting = true;
+                isStartingJump = false;
+                isMidair = false;
+                isLanding = false;
+                timeBeforeNextAction = 0;
             }
         }
             
