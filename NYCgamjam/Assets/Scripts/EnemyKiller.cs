@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyKiller : MonoBehaviour
 {
+    public GameObject enemyToKill;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,7 +17,7 @@ public class EnemyKiller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(enemyToKill.tag))
         {
             Destroy(other.gameObject);
         }
