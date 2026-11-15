@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class EndGameTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (gameEnded || other.GetComponentInParent<PlayerBehavior>() == null) return;
         if (GameTimer.Instance == null) return;
 
