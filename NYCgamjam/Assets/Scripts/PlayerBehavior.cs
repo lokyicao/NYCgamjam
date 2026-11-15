@@ -201,11 +201,6 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    //void OnColliderEnter2D(Collider2D other)
-    //{
-    //    Debug.Log("Ouch bro");
-    //}
-
     void OnCollisionEnter2D(Collision2D other)
     {
     }
@@ -235,7 +230,6 @@ public class PlayerBehavior : MonoBehaviour
                     invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, 2f);
                 }
             }
-            Debug.Log(invincibleTimeMeter);
 
             desiredDirection = Vector3.zero;
             Vector3 up = cameraTransform != null
