@@ -47,7 +47,7 @@ public class IntroSceneTransition : MonoBehaviour
         AddText(ui.transform, "EARLY PIGEON GETS THE CRUMBS", 170f, 54, new Color(1f, 0.85f, 0.4f));
         AddText(ui.transform, "New York never sleeps. Neither does a hungry pigeon.", 45f, 34, Color.white);
         AddText(ui.transform, "One delivery. A city of obstacles. Crumbs on the line.", -25f, 34, Color.white);
-        AddText(ui.transform, "oiia oiia placeholder text or smth", -140f, 30, new Color(1f, 0.85f, 0.4f));
+        AddText(ui.transform, "Placeholder", -140f, 30, new Color(1f, 0.85f, 0.4f));
     }
 
     private static void AddText(Transform parent, string message, float y, int fontSize, Color color)
