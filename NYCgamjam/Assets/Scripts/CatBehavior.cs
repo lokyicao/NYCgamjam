@@ -50,29 +50,47 @@ public class CatBehavior : MonoBehaviour
                     if (timeBeforeNextAction <= 0)
                     {
                         isWaiting = false;
+                        isStartingJump = true;
+                        timeBeforeNextAction = preJumpWaitTime;
+                        Debug.Log("startJump");
                     }
                 } else if (isStartingJump)
                 {
-
+                    timeBeforeNextAction -= Time.deltaTime;
+                    if (timeBeforeNextAction <= 0)
+                    {
+                        isMidair = true;
+                        isStartingJump = false;
+                        Debug.Log("startMidair");
+                    }
+                } else if (isLanding)
+                {
+                    timeBeforeNextAction -= Time.deltaTime;
+                    if (timeBeforeNextAction <= 0)
+                    {
+                        isWaiting = true;
+                        isLanding = false;
+                        timeBeforeNextAction = waitTime;
+                        Debug.Log("startLand");
+                    }
                 } else
                 {
                     if (Vector2.Distance(transform.position, targetPos) == 0)
                     {
                         targetPos = playerPos;
                         prevPos = transform.position;
-                        Debug.Log("startJump");
                     }
                     else
                     {
                         Vector2 moveAmount = (targetPos - prevPos) * Time.deltaTime / jumpTime;
                         transform.position += new Vector3(moveAmount.x, moveAmount.y, 0);
-                        Debug.Log(transform.position);
                         if (Vector2.Distance(transform.position, targetPos) < moveAmount.magnitude)
                         {
                             transform.position = new Vector3(targetPos.x, targetPos.y, 0);
-                            isWaiting = true;
-                            timeBeforeNextAction = waitTime;
-                            Debug.Log("landJump " + transform.position);
+                            isMidair = false;
+                            isLanding = true;
+                            timeBeforeNextAction = preJumpWaitTime;
+                            Debug.Log("StartWait");
                         }
                     }
                 }
@@ -80,6 +98,7 @@ public class CatBehavior : MonoBehaviour
             }
         } else
         {
+            transform.position = startPos;
             if (Vector2.Distance(transform.position, playerPos) < aggroRange)
             {
                 isChasing = true;
