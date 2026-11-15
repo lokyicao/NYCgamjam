@@ -11,13 +11,15 @@ public class comicmovement : MonoBehaviour
     private bool hasZoomed = false;
     int moveSpeed = 15;
     int frame = 0;
+    [SerializeField] private GameObject textObject;
     Vector3 position1, position2, position3, position4, position5;
 
     Vector3 positionGoal;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (textObject != null)
+            textObject.SetActive(true);
         position1 = new Vector3(8.69f, -4.84f, 0f);
         position2 = new Vector3(-8.71f, -4.84f, 0f);
         position3 = new Vector3(8.69f, 4.86f, 0f);
@@ -77,6 +79,7 @@ public class comicmovement : MonoBehaviour
             {
                 if (frame == 0)
                 {
+                    textObject.SetActive(false);
                     positionGoal = position2;
                     frame = 1;
                 }
