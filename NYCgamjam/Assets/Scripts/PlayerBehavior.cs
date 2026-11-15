@@ -195,7 +195,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isInvincible && other.CompareTag("Enemy"))
+        if (!isInvincible && (other.CompareTag("Rat")|| other.CompareTag("Human")|| other.CompareTag("Car")|| other.CompareTag("Cat")))
         {
             Debug.Log("ouch!!");
             Vector3 difference = transform.position - other.gameObject.transform.position;
