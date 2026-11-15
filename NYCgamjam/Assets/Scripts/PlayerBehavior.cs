@@ -30,9 +30,8 @@ public class PlayerBehavior : MonoBehaviour
     bool isStunned = false;
     bool isJumping = false;
     float currentInvincibleTime = 0f;
-    public float invincibleTimeMeter { get; private set; } = 2f;
+    public float invincibleTimeMeter { get; private set; } = maxInvincibleTime;
     float currentStunnedTime = 0f;
-    float invincibleCoolDownTime;
     const float maxInvincibleTime = 2f;
     const float totalStunTime = 0.5f;
 
@@ -217,6 +216,7 @@ public class PlayerBehavior : MonoBehaviour
                 } else
                 {
                     invincibleTimeMeter -= Time.deltaTime;
+                    currentInvincibleTime += Time.deltaTime;
                 }
                 
             } else
@@ -227,7 +227,7 @@ public class PlayerBehavior : MonoBehaviour
                 } else
                 {
                     invincibleTimeMeter += Time.deltaTime / 2;
-                    invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, 2f);
+                    invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, maxInvincibleTime);
                 }
             }
 
