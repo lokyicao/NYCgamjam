@@ -8,7 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public Vector3 enemyMoveDirection;
     Vector3 minPos;
     Vector3 maxPos;
-    const float spawnCooldown = 2f;
+    public float spawnCooldown = 2f;
+    public float timeDelay = 0;
     float timeSinceSpawn;
     bool isActive = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
         Collider2D collider = GetComponent<Collider2D>();
         minPos = collider.bounds.min;
         maxPos = collider.bounds.max;
-        Debug.Log(minPos);
+        timeSinceSpawn = -timeDelay;
     }
 
     // Update is called once per frame
