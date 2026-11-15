@@ -82,7 +82,7 @@ public class PlayerBehavior : MonoBehaviour
             // Flight audio is managed as a loop by UpdateMovementAudio.
             _animator.SetBool("isJumping", true);
             alpha = 0.9f;
-            float scaleUp = 1f + Mathf.Clamp(currentInvincibleTime * 2, 0f, 0.2f);
+            float scaleUp = 1f + Mathf.Clamp(currentInvincibleTime * 2, 0f, 0.1f);
             transform.localScale = new Vector2(scaleUp, scaleUp);
         }
         else if (desiredDirection != Vector3.zero)
