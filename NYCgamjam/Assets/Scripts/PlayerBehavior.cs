@@ -232,6 +232,7 @@ public class PlayerBehavior : MonoBehaviour
                 } else
                 {
                     invincibleTimeMeter += Time.deltaTime / 2;
+                    invincibleTimeMeter = Mathf.Clamp(invincibleTimeMeter, 0f, 2f);
                 }
             }
             Debug.Log(invincibleTimeMeter);
