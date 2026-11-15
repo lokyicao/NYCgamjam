@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 pos = GetPosInRange();
-        GameObject newEnemy = Instantiate(enemyToSpawn, pos, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemyToSpawn, pos, enemyToSpawn.transform.rotation);
         newEnemy.GetComponent<EnemyMovement>().SetDirection(enemyMoveDirection);
     }
 
