@@ -30,7 +30,7 @@ public class PlayerBehavior : MonoBehaviour
     bool isStunned = false;
     bool isJumping = false;
     float currentInvincibleTime = 0f;
-    public float invincibleTimeMeter { get; private set } = 2f;
+    public float invincibleTimeMeter { get; private set; } = 2f;
     float currentStunnedTime = 0f;
     float invincibleCoolDownTime;
     const float maxInvincibleTime = 2f;
