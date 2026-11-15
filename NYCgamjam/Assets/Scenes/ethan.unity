@@ -8494,7 +8494,7 @@ GameObject:
   - component: {fileID: 2019306885}
   m_Layer: 0
   m_Name: Cat
-  m_TagString: Enemy
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8543,7 +8543,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!50 &2019306881
 Rigidbody2D:
