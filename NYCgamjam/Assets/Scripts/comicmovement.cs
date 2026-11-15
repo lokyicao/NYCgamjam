@@ -61,7 +61,6 @@ public class comicmovement : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / zoomduration);
             
-            // SmoothStep creates a nice ease-in and ease-out curve
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
             targetCamera.orthographicSize = Mathf.Lerp(startSize, targetOrthographicSize, smoothT);
 
