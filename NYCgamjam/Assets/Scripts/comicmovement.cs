@@ -9,7 +9,7 @@ public class comicmovement : MonoBehaviour
     public float targetOrthographicSize = 10f;
     public float zoomduration =1.0f;    
     private bool hasZoomed = false;
-    int moveSpeed = 8;
+    int moveSpeed = 15;
     int frame = 0;
     Vector3 position1, position2, position3, position4, position5;
 
@@ -97,6 +97,11 @@ public class comicmovement : MonoBehaviour
                     positionGoal = position5;
                     frame = 4;
                     
+                }
+                else if(frame == 4)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("emma");
+                    frame = 5;
                 }
             }
         }
