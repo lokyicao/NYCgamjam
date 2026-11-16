@@ -98931,11 +98931,11 @@ PrefabInstance:
     - target: {fileID: 6252112672322694316, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
       propertyPath: enemyToSpawn
       value: 
-      objectReference: {fileID: 1597336375}
+      objectReference: {fileID: 1065542108}
     - target: {fileID: 6344301353259478863, guid: e5d93d3146c218a4e8002f7337a09db2, type: 3}
       propertyPath: enemyToSpawn
       value: 
-      objectReference: {fileID: 1065542108}
+      objectReference: {fileID: 1597336375}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -100547,11 +100547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2998283635888372276, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.46
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2998283635888372276, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.7
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2998283635888372276, guid: fcecf52d8f4b72d48bf955fd9cef692b, type: 3}
       propertyPath: m_LocalPosition.z

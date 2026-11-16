@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,11 +10,17 @@ using UnityEngine.InputSystem.UI;
 public class EndGameTrigger : MonoBehaviour
 {
     private static bool gameEnded;
+    private static readonly Dictionary<string, double> sessionBestTimes = new Dictionary<string, double>();
     private float previousTimeScale;
     private bool ownsPause;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetState() => gameEnded = false;
+    private static void ResetState()
+    {
+        gameEnded = false;
+        // Runs once per launch, including Play mode with domain reload disabled.
+        sessionBestTimes.Clear();
+    }
 
     private void Reset()
     {
@@ -23,9 +30,22 @@ public class EndGameTrigger : MonoBehaviour
     private void Awake()
     {
         GetComponent<BoxCollider2D>().isTrigger = true;
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        if (body == null)
+        {
+            body = gameObject.AddComponent<Rigidbody2D>();
+            body.bodyType = RigidbodyType2D.Kinematic;
+            body.gravityScale = 0f;
+        }
+        body.simulated = true;
+        body.useFullKinematicContacts = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) => TryFinish(other);
+
+    private void OnTriggerStay2D(Collider2D other) => TryFinish(other);
+
+    private void TryFinish(Collider2D other)
     {
 
         if (gameEnded || other.GetComponentInParent<PlayerBehavior>() == null) return;
@@ -36,21 +56,13 @@ public class EndGameTrigger : MonoBehaviour
         double elapsed = GameTimer.Instance.ElapsedSeconds;
         Scene scene = SceneManager.GetActiveScene();
         string key = "BestTime:" + (string.IsNullOrEmpty(scene.path) ? scene.name : scene.path);
-        double best = double.PositiveInfinity;
-        if (PlayerPrefs.HasKey(key))
-        {
-            if (!double.TryParse(PlayerPrefs.GetString(key),
-                System.Globalization.NumberStyles.Float,
-                System.Globalization.CultureInfo.InvariantCulture, out best)
-                || best < 0d || double.IsNaN(best))
-                best = double.PositiveInfinity;
-        }
+        if (!sessionBestTimes.TryGetValue(key, out double best))
+            best = double.PositiveInfinity;
         bool newBest = elapsed < best;
         if (newBest)
         {
             best = elapsed;
-            PlayerPrefs.SetString(key, best.ToString("R", System.Globalization.CultureInfo.InvariantCulture));
-            PlayerPrefs.Save();
+            sessionBestTimes[key] = best;
         }
 
         previousTimeScale = Time.timeScale;
