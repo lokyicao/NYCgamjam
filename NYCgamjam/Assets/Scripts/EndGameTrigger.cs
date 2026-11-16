@@ -30,7 +30,6 @@ public class EndGameTrigger : MonoBehaviour
     private void Awake()
     {
         GetComponent<BoxCollider2D>().isTrigger = true;
-        // A trigger needs at least one simulated Rigidbody2D in the pair.
         Rigidbody2D body = GetComponent<Rigidbody2D>();
         if (body == null)
         {
